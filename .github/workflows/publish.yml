@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - "master"
+
 permissions: write
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
