@@ -1,0 +1,20 @@
+<HTML><HEAD><TITLE>MIDI Specification: Sustenuto</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Sustenuto</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 66
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>Like the Hold Pedal controller, except this only sustains notes that are already on (ie, the device has
+received Note On messages, but the respective Note Offs haven't yet arrived) <U>when the pedal is turned on</U>. After
+the pedal is on, it continues to hold these initial notes all of the while that the pedal is on, but during that time, all other
+arriving Note Ons are not held. So, this pedal implements a "chord hold" for the notes that are sounding when this pedal is
+turned on. If a MultiTimbral device, then each Part usually has its own Sustenuto setting.
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> When on, this also postpones any <A HREF="ntnoff.htm">All Notes Off</A> controller message on the same channel for those notes
+being held.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>0 (to 63) is off. 127 (to 64) is on.
+
+</FONT></BODY></HTML>

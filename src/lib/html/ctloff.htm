@@ -1,0 +1,40 @@
+<HTML><HEAD><TITLE>MIDI Specification: All Controllers Off</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>All Controllers Off</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 121
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>Resets specific controllers to default states. In general, switches (such as Hold Pedal) are turned off, and continuous controllers (such as Mod Wheel) are set to minimum positions. If the device is MultiTimbral, this only affects the Part assigned to the MIDI channel upon which this message is received.
+
+<P>For a minimum implementation of "All Controllers off", it is recommended that the following controllers should be reset to the following values:
+
+<P><A HREF="mod.htm">Modulation Wheel</A> should be set to 0.
+
+<P><A HREF="exp.htm">Expression</A> should be set to full value (ie, 127 for both coarse, as well as fine if used).
+
+<P>The pedals <A HREF="hold.htm">Hold</A>, <A HREF="port.htm">Portamento</A>,
+<A HREF="sus.htm">Sustenuto</A>, <A HREF="soft.htm">Soft</A>, <A HREF="leg.htm">Legato</A>, and <A HREF="hold2.htm">Hold 2</A> should be set to 0 (ie, Off).
+
+<P><A HREF="vol.htm">Volume</A> should be set to 100.
+
+<P><A HREF="pan.htm">Pan</A> should be set to center (ie, 64 for both coarse, as well as fine if used).
+
+<P>Any <A HREF="nrpn.htm">Non-registered Parameters</A> or
+<A HREF="rpn.htm">Registered Parameters</A> may be reset to default values, such as pitch
+bend range being reset to +/- 2 semitones.
+
+<P>Additionally, the <A HREF="wheel.htm">Pitch Wheel</A> should be reset to center position,
+and <A HREF="pressure.htm">Channel Pressure</A> should be set to 0, although these technically
+aren't adjusted via MIDI controller messages. If a module supports <A HREF="aftert.htm">Aftertouch</A>, then the Aftertouch amount for each note (on the MIDI channel) should also be reset to 0.
+
+<P>A device should <U>not</U> reset its mode (as done via <A HREF="omoff.htm">Omni Mode Off</A>, <A HREF="omon.htm">Omni Mode On</A>, <A HREF="mono.htm">Mono Operation</A>, and
+<A HREF="poly.htm">Poly Operation</A> controllers).
+
+<P>A device should include documentation that lists what is reset by an All Controllers Off
+message.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>The value byte isn't used and defaults to 0.
+
+</FONT></BODY></HTML>

@@ -1,0 +1,86 @@
+<HTML><HEAD><TITLE>MIDI Specification: Registered Parameter Number</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Registered Parameter Number (RPN)</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 101 (coarse) 100 (fine)
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>Which parameter the <A HREF="dinc.htm">Data Button Increment</A>, <A HREF="ddec.htm">Data
+Button Decrement</A>, or <A HREF="dslider.htm">Data Entry</A>
+controllers affect. Since RPN has a coarse/fine pair (14-bit), the number of parameters that can
+be registered is 16,384. That's a lot of parameters that a MIDI device could allow to be
+controlled over MIDI. It's up to the MMA to assign Registered Parameter Numbers to specific
+functions.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>0 to 16,384 where each value stands for a different RPN. Here are the currently registered
+parameter numbers:
+
+<P><FONT COLOR=RED><B>Pitch Bend Range (ie, Sensitivity) 0x0000</B></FONT><BLOCKQUOTE>
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> The coarse adjustment (usually set via Data Entry 6) sets the range in semitones. The fine adjustment (usually set via
+Data Entry 38) set the range in cents. For example, to adjust the pitch wheel range to go up/down 2 semitones and 4
+cents:
+
+<PRE><B><FONT SIZE=3>B0 65 00  <FONT COLOR=BLUE>Controller/chan 0, RPN coarse (101), Pitch Bend Range</FONT>
+B0 64 00  <FONT COLOR=BLUE>Controller/chan 0, RPN fine (100), Pitch Bend Range</FONT>
+B0 06 02  <FONT COLOR=BLUE>Controller/chan 0, Data Entry coarse, +/- 2 semitones</FONT>
+B0 26 04  <FONT COLOR=BLUE>Controller/chan 0, Data Entry fine, +/- 4 cents</FONT>
+</B></FONT></PRE>
+</BLOCKQUOTE>
+
+<FONT COLOR=RED><B>Master Fine Tuning (ie, in cents) 0x0001</B></FONT><BLOCKQUOTE>
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> Both the coarse and fine adjustments together form a 14-bit value that sets the tuning in semitones, where 0x2000 is
+A440 tuning.
+</BLOCKQUOTE>
+
+<P><FONT COLOR=RED><B>Master Coarse Tuning (in half-steps) 0x0002</B></FONT><BLOCKQUOTE>
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> Setting the coarse adjustment adjusts the tuning in semitones, where 0x40 is A440 tuning. There is no need to set a
+fine adjustment.
+</BLOCKQUOTE>
+
+<P><FONT COLOR=RED><B>RPN Reset 0x3FFF</B></FONT><BLOCKQUOTE>
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> No coarse or fine adjustments are applicable. This is a "dummy" parameter.
+</BLOCKQUOTE>
+
+<P>Here's the way that you use RPN. First, you decide which RPN you wish to control. Let's say that we wish to set Master
+Fine Tuning on a device. That's RPN 0x0001. We need to send the device the RPN Coarse and RPN Fine controller
+messages in order to tell it to affect RPN 0x0001. So, we divide the 0x0001 into 2 bytes, the fine byte and the coarse
+byte. The fine byte contains bits 0 to 6 of the 14-bit value. The coarse byte contains bits 7 to 13 of the 14-bit value,
+right-justified. So, here are the RPN Coarse and Fine messages (assuming that the device is responding to MIDI channel
+0):
+
+<PRE><B><FONT SIZE=3>B0 65 00  <FONT COLOR=BLUE>Controller/chan 0, RPN coarse (101), bits
+	    7 to 13 of 0x0001, right-justified (with high bit clear)</FONT>
+B0 64 01  <FONT COLOR=BLUE>Controller/chan 0, RPN fine (100), bits
+	    0 to 6 of 0x0001, (with high bit clear)</FONT>
+</B></FONT></PRE>
+
+Now, we've just told the device that any Data Button Increment, Data Button decrement, or
+Data Entry controllers it receives should affect the Master Fine Tuning. Let's say that we wish to set this tuning
+to the 14-bit value 0x2000 (which happens to be centered tuning). We could use the Data Entry (coarse and fine) controller
+messages as so to send that 0x2000:
+
+<PRE><B><FONT SIZE=3>B0 06 40  <FONT COLOR=BLUE>Controller/chan 0, Data Entry coarse (6), bits
+	    7 to 13 of 0x2000, right-justified (with high bit clear)</FONT>
+B0 26 00  <FONT COLOR=BLUE>Controller/chan 0, Data Entry fine (38), bits
+	    0 to 6 of 0x2000, (with high bit clear)</FONT>
+</B></FONT></PRE>
+
+As a final example, let's say that we wish to increment the Master Fine Tuning by one (ie, to 0x2001). We could use the
+Data Entry messages again. Or, we could use the Data Button Increment, which doesn't have a coarse/fine pair of
+controller numbers like Data Entry.
+
+<PRE><B><FONT SIZE=3>B0 60 00  <FONT COLOR=BLUE>Controller/chan 0, Data Button Increment (96),
+               last byte is unused</FONT>
+</B></FONT></PRE>
+Of course, if the device receives RPN messages for another parameter, then the Data Button Increment, Data Button
+Decrement, and Data Entry controllers will switch to adjusting that parameter.
+
+<P>RPN 0x3FFF (reset) forces the Data Button increment, Data Button decrement, and Data Entry controllers to not adjust
+any RPN (ie, disables those buttons' adjustment of any RPN).
+
+</FONT></BODY></HTML>

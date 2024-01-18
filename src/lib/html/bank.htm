@@ -1,0 +1,34 @@
+<HTML><HEAD><TITLE>MIDI Specification: Bank Select</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Bank Select</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 0 (coarse) 32 (fine)
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>Some MIDI devices have more than 128 Programs (ie, Patches, Instruments, Preset, etc). A MIDI Program
+Change message supports switching between only 128 programs. So, Bank Select Controller (sometimes
+called Bank Switch) is sometimes used to allow switching between groups of 128 programs. For example, let's
+say that a device has 512 Programs. It may divide these into 4 banks of 128 programs apiece.  So, if you
+want program #129, that would actually be the first program within the second bank. You would send a Bank
+Select Controller to switch to the second bank, and then follow with a Program Change to select the first
+Program in this bank. If a MultiTimbral device, then each Part usually can be set to its own Bank/Program.
+
+<P>On MultiTimbral devices that have a Drum Part, the Bank Select is sometimes used to switch between
+"Drum Kits".
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> When a Bank Select is received, the MIDI module doesn't actually
+change to a patch in the new bank. Rather, the Bank Select value is simply stored by the MIDI module without
+changing the current patch. Whenever a subsequent Program Change is received, the stored Bank Select is
+<U>then</U> utilized to switch to the specified patch in the new bank. For this reason, Bank Select must be
+sent <U>before</U> a Program Change, when you desire changing to a patch in a different bank. (Of course, if
+you simply wish to change to another patch in the same bank, there is no need to send a Bank Select first).
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>14-bit coarse/fine resolution. 0x0000 to 0x3FFF. Various manufacturers may number their banks differently.
+Consult the documentation for a MIDI device to determine what values to use with the Bank Select Coarse and
+Bank Select Fine messages to select particular banks.
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> Most devices use the Coarse adjust (#0) alone to switch
+banks since most devices don't have more than 128 banks (of 128 Patches each).
+
+</FONT></BODY></HTML>

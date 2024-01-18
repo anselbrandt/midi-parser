@@ -1,0 +1,37 @@
+<HTML><HEAD><TITLE>MIDI Specification: Volume</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Volume</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 7 (coarse) 39 (fine)
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>The volume level for one MIDI channel. If a MultiTimbral device, then each Part has its own
+volume.
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> A device's master volume may be controlled by another
+method such as the <A HREF="mastrvol.htm">Univeral SysEx Master Volume message</A>,
+or take its volume from one of the Parts, or be controlled by a General Purpose Slider controller.
+
+<P><A HREF="exp.htm">Expression</A> Controller also may affect the volume.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>14-bit coarse/fine resolution. 0x0000 to 0x3FFF where 0 is no volume at all.
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> Most all devices ignore the Fine adjust (#39) for Volume, and just
+implement Coarse adjust (#7) because 14-bit resolution isn't needed for this. In this case, maximum is
+127 and off is 0.
+
+<P>It is recommended that a device use the volume value in a logarithmic manner, as specified
+by the following formula if only the coarse value is used:
+
+<PRE><FONT SIZE=3 COLOR=BLUE><B>40 log (Volume/127)</B></FONT></PRE>
+
+<P>If both the coarse and fine values are used (and combined into a 14-bit volume), then use
+the following formula:
+
+<PRE><FONT SIZE=3 COLOR=BLUE><B>40 log (Volume/127&sup2;)</B></FONT></PRE>
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> In the above formula, "Volume" may be equal to
+Channel Volume * Expression.
+
+</FONT></BODY></HTML>

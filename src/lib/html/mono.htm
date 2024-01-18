@@ -1,0 +1,48 @@
+<HTML><HEAD><TITLE>MIDI Specification: Monophonic Operation</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Monophonic Operation</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 126
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>Enables <B>Monophonic operation</B> (thus disabling Polyphonic operation). See the discussion on
+<A HREF="modes.htm">MIDI Modes</A>.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>If Omni is off, this Value tells how many MIDI channels the device is expected to respond to in Mono mode. In other
+words, if Omni is off, this value is used to select a limited set of the 16 MIDI channels (ie, 1 to 16) to respond to.Conversely,
+if Omni is on, this Value is ignored completely, and the device only ever plays one note at a time (unless a MultiTimbral
+device). So, the following discussion is only relevant if Omni Off.
+
+<P>If Value is 0, then the number of MIDI channels that the device will respond to simultaneously will be equal to how many
+voices the device can sound simultaneously. In other words, if the device can sound at least 16 voices simultaneously,
+then it can respond to Voice Category messages on all 16 channels. Of course, being Monophonic operation, the device
+can only sound one note at a time per each MIDI channel.  So, it can sound a note on channel 1 and channel 2
+simultaneously, for example, but can't sound 2 notes both on channel 1 simultaneously.
+
+<P>Of course, MultiTimbral devices completely violate the preceding theory. MultiTimbral devices always can play
+polyphonically on each MIDI channel. If Value is 0, what this means is that the device can play as many MIDI channels as it
+has Parts.  So, if the device can play 16 of its patches simultaneously, then it can respond to Voice Category messages on
+all 16 channels.
+
+<P>If Value is not 0 (ie, 1 to 16), then that's how many MIDI channels the device is allowed to respond to. For example, a
+value of 1 would mean that the device would only be able to respond to 1 MIDI channel. Since the device is also limited to
+sounding only 1 note at a time on that MIDI channel, then the device would truly be a Monophonic instrument incapable of
+sounding more than one note at a time. If a device is asked to respond to more MIDI channels than it has voices to
+accomodate, then it will handle only as many MIDI channels as it has voices. For example, if an 8-voice synth, on Base
+Channel 0, receives the value 16 in the Mono message, then the synth will play messages on MIDI channels 0 to 7 and
+ignore messages on 8 to 15.
+
+<P>Again, MultiTimbral devices violate the above theory. A value of 1 would mean that the device would only be able to
+respond to 1 MIDI channel (and therefore only play 1 Part), but would do so Polyphonically. If a MultiTimbral device is
+asked to respond to more MIDI channels than it has Parts to accomodate, then it will handle only as many MIDI channels
+as it has Parts. For example, if a device can play only 5 Patches simultaneously, and receives the value 8 in the Mono
+message, then the device will play 5 patches on MIDI channels 0 to 4 and ignore messages on channels 5 to 7.
+
+<P>Most devices capable of Monophonic operation, allow the user to specify a <B>Base Channel</B>. This will be the
+lowest MIDI channel that the device responds to. For example, if a Mono message specifies that the device is to respond
+to only 2 channels, and its Base Channel is 2, then the device responds to channels 2 and 3.
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> When a device receives a Mono Operation message, it should automatically turn off all playing notes.
+
+</FONT></BODY></HTML>

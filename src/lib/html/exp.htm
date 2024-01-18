@@ -1,0 +1,46 @@
+<HTML><HEAD><TITLE>MIDI Specification: Expression</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Expression</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 11 (coarse) 43 (fine)
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>This is a percentage of Volume (ie, as set by <A HREF="vol.htm">Volume Controller</A>). In
+other words, Expression divides the current volume into 16,384 steps (or 128 if 8-bit instead
+of 14-bit resolution is used). Volume Controller is used to set the overall volume of the entire
+musical part (on a given channel), whereas Expression is used for doing crescendos and
+decrescendos. By having both a master Volume and sub-Volume (ie, Expression), it makes possible
+to do crescendos and decrescendos without having to do algebraic calculations to maintain the
+relative balance between instruments. When Expression is at 100% (ie, the maximum of 0x3FFF), then
+the volume represents the true setting of Volume Controller. Lower values of Expression begin
+to subtract from the volume. When Expression is 0% (ie, 0x0000), then volume is off. When
+Expression is 50% (ie, 0x1FFF), then the volume is cut in half.
+
+<P>Here's how Expression is typically used. Let's assume only the coarse adjust is used (ie, #11)
+and therefore only 128 steps are possible. Set the Expression for every MIDI channel to one initial
+value, for example 100. This gives you some leeway to increase the expression percentage (ie, up
+to 127 which is 100%) or decrease it. Now, set the channel (ie, instrument) "mix" using Volume
+Controllers. Maybe you'll want the drums louder than the piano, so the former has a Volume
+Controller value of 110 whereas the latter has a value of 90, for example. Now if, at some point,
+you want to drop the volumes of both instruments to half of their current Main Volumes, then send
+Expression values of 64 (ie, 64 represents a 50% volume percentage since 64 is half of 128 steps).
+This would result in the drums now having an effective volume of 55 and the piano having an
+effective volume of 45. If you wanted to drop the volumes to 25% of their current Main Volumes,
+then send Expression values of 32. This would result in the drums now having an effective volume
+of approximately 27 and the piano having an effective volume of approximately 22. And yet, you
+haven't had to change their Volume settings, and therefore still maintain that relative mix between
+the two instruments. So think of Volume Controllers as
+being the individual faders upon a mixing console. You set up the instrumental balance (ie, mix)
+using these values. Then you use Expression Controllers as "group faders", whereby you can
+increase or decrease the volumes of one or more tracks without upsetting the relative balance
+between them.
+
+<P>If a MultiTimbral device, then each Part usually has its own Expression level.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>14-bit coarse/fine resolution. 0x0000 to 0x3FFF where 0 is minimum effect.
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> Most all devices ignore the Fine adjust (#43) for Expression, and just implement Coarse adjust (#11) because 14-bit
+resolution isn't needed for this.
+
+</FONT></BODY></HTML>

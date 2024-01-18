@@ -1,0 +1,22 @@
+<HTML><HEAD><TITLE>MIDI Specification: Balance</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Balance</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 8 (coarse) 40 (fine)
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>The device's stereo balance (assuming that the device has stereo audio outputs). If a MultiTimbral device, then each
+Part usually has its own Balance. This is generally when Balance becomes useful, because then you can use Pan, Volume,
+and Balance controllers to internally mix all of the Parts to the device's stereo outputs. Typically, Balance would be used
+on a Part that had stereo elements (where you wish to adjust the volume of the stereo elements without changing their pan
+positions), whereas <A HREF="pan.htm">Pan</A> is more appropriate for a Part that is strictly a "mono instrument".
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>14-bit coarse/fine resolution. 16,384 possible setting, 0x0000 to 0x3FFF where 0x2000 is center balance, 0x0000
+emphasizes the left elements mostly, and 0x3FFF emphasizes the right elements mostly. Some devices only respond to
+coarse adjust (128 settings) where 64 is center, 0 is leftmost emphsis, and 127 is rightmost emphasis.
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> Most all devices ignore the Fine adjust (#40) for Balance, and just implement Coarse adjust (#8) because 14-bit
+resolution isn't needed for this.
+
+</FONT></BODY></HTML>

@@ -1,0 +1,19 @@
+<HTML><HEAD><TITLE>MIDI Specification: Local Keyboard on/off</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Local Keyboard on/off</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 122
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>Turns the device's keyboard on or off locally. If off, the keyboard is disconnected from the device's internal sound
+generation circuitry. So when the musician presses keys, the device doesn't trigger any of its internal sounds. But, the
+keyboard still generates Note On, Note Off, Aftertouch, and Channel Pressure messages. In this way, a musician can
+eliminate a situation where MIDI messages get looped back (over MIDI cables) to the device that created those
+messages. Furthermore, if a device is only going to be played remotely via MIDI, then the keyboard may be turned off in
+order to allow the device to concentrate more on dealing with MIDI messages rather than scanning the keyboard for
+depressed notes and varying pressure.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>0 (to 63) is off. 127 (to 64) is on.
+
+</FONT></BODY></HTML>

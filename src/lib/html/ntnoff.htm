@@ -1,0 +1,22 @@
+<HTML><HEAD><TITLE>MIDI Specification: All Notes Off</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>All Notes Off</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 123
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>Turns off all notes that were turned on by received Note On messages, and which haven't yet been turned off by
+respective Note Off messages. This message is not supposed to turn off any notes that the musician is playing on the
+local keyboard. So, if a device can't distinguish between notes played via its <B>MIDI IN</B> and notes played on the
+local keyboard, it should not implement All Notes Off. Furthermore, if a device is in Omni On state, it should
+ignore this message on <U>any</U> channel.
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> If the device's <A HREF="hold.htm">Hold Pedal</A> controller
+is on, the notes aren't actually released until the Hold Pedal is turned off. See
+<A HREF="sndoff.htm">All Sound Off</A> controller message for turning off the sound of these notes
+immediately.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>The value byte isn't used and defaults to 0.
+
+</FONT></BODY></HTML>

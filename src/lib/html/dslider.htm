@@ -1,0 +1,22 @@
+<HTML><HEAD><TITLE>MIDI Specification: Data Entry Slider</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Data Entry Slider</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 6 (coarse) 38 (fine)
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>The value of some <A HREF="rpn.htm">Registered</A> or <A HREF="nrpn.htm">Non-Registered</A>
+Parameter. Which parameter is affected depends upon a preceding
+RPN or NRPN message (which itself identifies the parameter's number).
+
+<P>On some devices, this slider may not be used in conjunction with RPN or NRPN
+messages. Instead, the musician can set the slider to control a single
+parameter directly, often a parameter such as what Aftertouch can control.
+
+<P>If a MultiTimbral device, then each Part usually has its own RPN and NRPN settings, and Data
+Entry slider setting.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>14-bit coarse/fine resolution. 0x0000 to 0x3FFF where 0 is minimum effect.
+
+</FONT></BODY></HTML>

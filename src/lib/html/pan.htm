@@ -1,0 +1,25 @@
+<HTML><HEAD><TITLE>MIDI Specification: Pan</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Pan</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 10 (coarse) 42 (fine)
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>Where within the stereo field the device's sound will be placed (assuming that it has stereo
+audio outputs). If a MultiTimbral device, then each Part usually has its own pan position. This
+is generally when Pan becomes useful, because then you can use Pan, <A HREF="vol.htm">Volume</A>,
+and <A HREF="balance.htm">Balance</A> controllers to internally mix all of the Parts to the
+device's stereo outputs.
+
+<P>Pan should effect all notes on the channel, including notes that were triggered prior to the
+pan message being received, and are still sustaining.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>14-bit coarse/fine resolution. 16,384 possible positions, 0x0000 to 0x3FFF where 0x2000 is center position, 0x0000 is
+hard left, and 0x3FFF is hard right. Some devices only respond to coarse adjust (128 positions) where 64 is center, 0 is
+hard left, and 127 is hard right.
+
+<P><B><FONT COLOR=RED>Note:</FONT></B> Most all devices ignore the Fine adjust (#42) for Pan, and just implement Coarse adjust (#10) because 14-bit resolution
+isn't needed for this.
+
+</FONT></BODY></HTML>

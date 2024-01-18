@@ -1,0 +1,28 @@
+<HTML><HEAD><TITLE>MIDI Specification: Non-Registered Parameter Number</TITLE></HEAD><BODY TEXT=BLACK BGCOLOR=WHITE LINK=RED VLINK=PURPLE ALINK=PURPLE><FONT SIZE=4>
+
+<H2><FONT COLOR=GREEN><CENTER>Non-Registered Parameter Number (NRPN)</CENTER></FONT></H2>
+
+<P><B><FONT COLOR=GREEN>Number:</FONT></B> 99 (coarse) 98 (fine)
+
+<P><B><FONT COLOR=GREEN>Affects:</FONT></B>
+<P>Which parameter the <A HREF="dinc.htm">Data Button Increment</A>, <A HREF="ddec.htm">Data
+Button Decrement</A>, or <A HREF="dslider.htm">Data Entry</A>
+controllers affect. Since NRPN has a coarse/fine pair (14-bit), the number of parameters that can be registered is
+16,384. That's a lot of parameters that a MIDI device could allow to be controlled over MIDI. It's entirely up to each
+manufacturer which parameter numbers are used for whatever purposes. These don't have to be registered with the MMA.
+
+<P><B><FONT COLOR=GREEN>Value Range:</FONT></B>
+<P>The same scheme is used as per the Registered Parameter controller. Refer to that. By contrast, the coarse/fine
+messages for NRPN for the preceding RPN example would be:
+
+<PRE><B><FONT SIZE=3>B0 63 00
+B0 62 01
+</B></FONT></PRE>
+
+<B><FONT COLOR=RED>Note:</FONT></B> Since each device can define a particular NRPN controller
+number to control anything, it's possible that 2 devices may interpret the same
+NRPN number in different manners. Therefore, a device should allow a
+musician to disable receipt of NRPN, in the event that there is a conflict
+between the NRPN implementations of 2 daisy-chained devices.
+
+</FONT></BODY></HTML>
