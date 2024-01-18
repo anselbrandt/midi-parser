@@ -1,3 +1,3 @@
 export type Message = string;
 
-export const log = (msg: Message) => console.log(msg);
+export const log = (msg: Message) => console.log("Msg:", msg);
